@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Lane from '../../components/Lane/Lane';
 import add from "../../assets/add_task.svg"
 import "./board.css"
 import Modal from '../../components/Modal/Modal';
+import api from "../../api/tasks"
 
 const Board = () => {
 
@@ -19,6 +20,41 @@ const Board = () => {
         setModalState(prevData => !prevData);
       }
 
+      /* Fetching Datas */
+
+      const [loading, setLoading] = useState(false);
+      const [tasks, setTasks] = useState([]);
+      const [error, setError] = useState('');
+
+      useEffect(() => {
+        
+        const fetchData = async () => {
+
+          try {
+
+            const response = await api.get('/tasks');
+
+            if (response && response.data){
+              console.log(response.data);
+              setTasks(response.data);
+              setLoading(false);
+            }
+          } catch (err) {
+            if (err.response) {
+              console.log(err.response.data);
+              console.log(err.response.status);
+              console.log(err.response.headers);
+            } else {
+              setLoading(false);
+              setError(err.message);
+            }
+          }
+        }
+
+        fetchData();
+
+      }, [])
+
   return (
     <div className='Board-wrapper'>
 
@@ -30,11 +66,18 @@ const Board = () => {
     <div className='add_task' onClick={modalSwitch}>
       <span>Add new task </span> <img src={add} alt="add a task" />
     </div>
+
     </div>
 
     <div className='Board-lane'>
     {lanes.map((lane) => (
-      <Lane key={lane.id} title={lane.title} tBackground={lane.bColor}/>
+      <Lane
+       key={lane.id} 
+       title={lane.title} 
+       tBackground={lane.bColor}
+       loading={loading}
+       error={error}
+       tasks={tasks.filter((task) => task.lane === lane.id)}       />
     ))}
     </div>
   </div>

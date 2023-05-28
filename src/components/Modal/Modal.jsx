@@ -11,11 +11,9 @@ const Modal = ({setModalState}) => {
 
    <div className='Modal-transparent'>
 
-        <div className='Modal'>
+        <form className='Modal'>
 
         <img src={cancel_button} onClick={cancel} className='cancelButton' alt="cancel button" />
-
-        <form className="Modal-form">
 
             <div className='Modal-title'>
                 <label>Title</label>
@@ -24,12 +22,11 @@ const Modal = ({setModalState}) => {
 
             <div className='Modal-body'>
                 <label>Details</label>
-                <input type="text" className='inputBody' placeholder='Enter Task Details'/>
+                <textarea className='txtArea' placeholder='Enter Task Details'></textarea>
             </div>
 
             <button className='Modal-button'> Create Task </button>
         </form>
-        </div>
 
    </div>
   )

@@ -15,14 +15,15 @@
 .Modal {
     position: relative;
     display: flex;
+    
+    flex-direction: column;
     background: #FFFFFF;
-    justify-content: center;
-    align-items: center;
     max-width: 100%;
-    gap: 1rem;
-    width: 700px;
-    height: 500px;
+    gap: 2rem;
     border-radius: 10px;
+    padding: 50px 100px;
+    height: 500px;
+    width: 700px;
 }
 
 .cancelButton {
@@ -34,15 +35,14 @@
     cursor: pointer;
 }
 
-.Modal-form {
+/* .Modal-form {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 50px 100px;
-}
+    position: relative;
+} */
 
 .Modal-title, .Modal-body {
     display: flex;
@@ -51,14 +51,37 @@
 }
 
 .inputTitle {
+    max-width: 100%;
     border-radius: 10px;
-    border: 1px solid #5030E5;
+    border: 1px solid #111111;
     padding: 18px 20px;
 }
 
-.inputBody {
+
+.Modal-button {
+    padding: 12px 186px;
+    background: #5030E5;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 20px;
+    outline: none;
     border-radius: 10px;
-    border: 1px solid #5030E5;
+    border: none;
+    cursor: pointer;
+}
+
+.txtArea {
+    height: 165px;
+    border-radius: 10px;
+    border: 1px solid #111111;
     padding: 18px 20px;
 }
 
+.inputTitle:focus, .txtArea:focus {
+    border: 2px solid #5030E5 !important;
+    outline: none !important;
+}
+
+/* input:focus {
+    border: 1px solid #5030E5 !important;
+} */
