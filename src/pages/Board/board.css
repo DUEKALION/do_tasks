@@ -1,0 +1,40 @@
+.Board-wrapper {
+    height: 82.5vh;
+    max-height: 100%;
+    background-color: #EEEAFC;
+    padding: 20px 30px;
+    max-width: 100%;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+}
+
+.Board-lane {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+.Board-top {
+    display: flex;
+    gap: 2rem;
+}
+
+.add_task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 20px;
+    color: #5030E5;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.add_task > span {
+    width: 100%;
+}

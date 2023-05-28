@@ -1,0 +1,18 @@
+.SearchBar-wrapper {
+    width: 350px;
+    height: 35px;
+    background: #E5E0FB;
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input {
+    height: inherit;
+    width: inherit;
+    border: none;
+    outline: none;
+    background: inherit;
+}
