@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react';
+import useDataFetching from '../../hooks/useDataFetching';
 import Lane from '../../components/Lane/Lane';
 import add from "../../assets/add_task.svg"
 import "./board.css"
 import Modal from '../../components/Modal/Modal';
-import api from "../../api/tasks"
+import tasks from '../../api/tasks';
+
 
 const Board = () => {
+
+    let dataLength;
 
     const lanes = [
         { id: 1, title: 'To Do', bColor: "#4026B7"},
@@ -20,45 +24,20 @@ const Board = () => {
         setModalState(prevData => !prevData);
       }
 
-      /* Fetching Datas */
-
-      const [loading, setLoading] = useState(false);
-      const [tasks, setTasks] = useState([]);
-      const [error, setError] = useState('');
-
-      useEffect(() => {
-        
-        const fetchData = async () => {
-
-          try {
-
-            const response = await api.get('/tasks');
-
-            if (response && response.data){
-              console.log(response.data);
-              setTasks(response.data);
-              setLoading(false);
-            }
-          } catch (err) {
-            if (err.response) {
-              console.log(err.response.data);
-              console.log(err.response.status);
-              console.log(err.response.headers);
-            } else {
-              setLoading(false);
-              setError(err.message);
-            }
-          }
-        }
-
-        fetchData();
-
-      }, [])
+      
+      
+      const [loading, error, datas] = useDataFetching('/tasks');
+      console.log(datas)
+      
+      if(datas.length){
+       dataLength = datas.length;
+       console.log(dataLength);
+      }
 
   return (
     <div className='Board-wrapper'>
 
-      {modalState && <Modal setModalState={setModalState}/>}
+      {modalState && dataLength && <Modal setModalState={setModalState} />}
     
     <div className='Board-top'>
     <h2 className="Board-title">Tasks</h2>
@@ -77,7 +56,8 @@ const Board = () => {
        tBackground={lane.bColor}
        loading={loading}
        error={error}
-       tasks={tasks.filter((task) => task.lane === lane.id)}       />
+       tasks={Array.isArray(datas) && datas.filter((task) => task.lane === lane.id)}    
+     />
     ))}
     </div>
   </div>

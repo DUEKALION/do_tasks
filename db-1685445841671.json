@@ -41,24 +41,6 @@
       "title": "Create new database instance",
       "body": " Curabitur nec sem lorem. Donec venenatis, arcu vitae malesuada consequat, dolor ante placerat mi, in fermentum diam ipsum id libero.",
       "lane": 4
-    },
-    {
-      "title": "Bible Reading",
-      "body": "Read my bible everyday",
-      "lane": 1,
-      "id": 8
-    },
-    {
-      "id": 9,
-      "title": "Bible Reading",
-      "body": "",
-      "lane": 1
-    },
-    {
-      "id": 10,
-      "title": "Pull and Push",
-      "body": "Pull and push to github after todays tasks are being completed.",
-      "lane": 1
     }
   ]
 }

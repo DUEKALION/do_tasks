@@ -1,4 +1,4 @@
-.Task {
+/* .Task {
     position: relative;
     width: 90%;
     height: 200px;
@@ -21,21 +21,18 @@
     top: 0;
     left: 0;
     bottom: 0;
-    background-color: blue;
     border-radius: 10px;
-}
+} */
 
-.Task-title, .Task-body {
-    width: 85%;
-    height: auto;
-}
 
 .Task-title {
+    width: 85%;
     height: 50px;
     overflow: hidden;
 }
 
 .Task-body {
+    width: 100%;
     height: 70px;
     overflow: hidden
 }
@@ -45,4 +42,22 @@
     background-color: #301D89;
     width: 108px;
     color: white;
+    border-radius: 10px;
+}
+
+.dots {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.threedots-conts {
+    display: flex;
+    gap: 10px;
+    background-color: transparent;
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    
 }

@@ -20,6 +20,7 @@ const Lane = ({title, count, tBackground, loading, error, tasks}) => {
               id={task.id}
               title={task.title}
               body={task.body}
+              rodColor={task.tBackground}
               />
           ))
         )}

@@ -15,7 +15,6 @@
 .Modal {
     position: relative;
     display: flex;
-    
     flex-direction: column;
     background: #FFFFFF;
     max-width: 100%;
