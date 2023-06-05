@@ -4,6 +4,7 @@ import Lane from '../../components/Lane/Lane';
 import add from "../../assets/add_task.svg"
 import "./board.css"
 import Modal from '../../components/Modal/Modal';
+import ModalEdit from '../../components/ModalEdit/ModalEdit';
 import tasks from '../../api/tasks';
 
 
@@ -13,32 +14,47 @@ const Board = () => {
 
     const lanes = [
         { id: 1, title: 'To Do', bColor: "#4026B7"},
-        { id: 2, title: 'In Progress', bColor: "#FFBC12" },
-        { id: 3, title: 'Review', bColor: "#2FB02B" },
-        { id: 4, title: 'Done', bColor: "#4026B7" },
+        { id: 2, title: 'In Progress', bColor: "#0074D9" },
+        { id: 3, title: 'Review', bColor: "#FFA500" },
+        { id: 4, title: 'Done', bColor: "#2FB02B" },
       ];
 
+     
+
       const [modalState, setModalState] = useState(false);
+      const [editModalState, setEditModalState] = useState(false);
+
+      const [taskId, setTaskId] = useState('');
+
+      console.log(taskId);
+      const handleIdRetrieval = (data) => {
+        setTaskId(data)
+      }
 
       const modalSwitch = () => {
         setModalState(prevData => !prevData);
       }
 
+      const handlEditModal = () => {
+        console.log(editModalState);
+        setEditModalState(prevState => !prevState);
+      }
       
       
       const [loading, error, datas] = useDataFetching('/tasks');
-      console.log(datas)
       
       if(datas.length){
        dataLength = datas.length;
-       console.log(dataLength);
       }
 
   return (
     <div className='Board-wrapper'>
 
       {modalState && dataLength && <Modal setModalState={setModalState} />}
-    
+      
+      
+      {editModalState ? <ModalEdit setEditModalState={setEditModalState} taskId={taskId} /> : ""}
+
     <div className='Board-top'>
     <h2 className="Board-title">Tasks</h2>
 
@@ -56,7 +72,10 @@ const Board = () => {
        tBackground={lane.bColor}
        loading={loading}
        error={error}
-       tasks={Array.isArray(datas) && datas.filter((task) => task.lane === lane.id)}    
+       tasks={Array.isArray(datas) && datas.filter((task) => task.lane === lane.id)}
+       setEditModalState={setEditModalState}
+       editModal={handlEditModal}    
+       sendIdToParent={handleIdRetrieval}
      />
     ))}
     </div>

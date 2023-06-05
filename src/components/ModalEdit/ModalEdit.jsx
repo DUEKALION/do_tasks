@@ -1,24 +1,37 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import api from "../../api/tasks"
+import tasks from "../../api/tasks"
 import "./modaledit.css"
+import cancel_button from "../../assets/cancel_button.svg"
 
-const ModalEdit = ({setEditPopupState}) => {
+const ModalEdit = ({setEditModalState, taskId}) => {
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+            try {
+                const response = await api.get('/tasks/' + taskId);
+                setData(response.data);
+            } catch (err) {
+                console.error('Error fetching data', err);
+            }
+        };
+        fetchData();
+    }, []);
 
     const cancel = () => {
-        setEditPopupState(prevData => !prevData)
-    }
 
-    const [editData, setEditData] = useState({
-        id: '',
-        title: '',
-        body: '',
-        lane: 1
-    });
+        setEditModalState(prevState => !prevState);
+    }
+   
+
+    const [data, setData] = useState({});
 
     const handleInputChange = (event) => {
 
         const {name, value} = event.target;
 
-        setAddData((prevData) => ({
+        setData((prevData) => ({
             ...prevData,
             [name]: value
         }));
@@ -27,9 +40,15 @@ const ModalEdit = ({setEditPopupState}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-       
 
-        setModalState(false);
+        try {
+            await api.put('/tasks/' + taskId, data);
+           } catch (err) {
+             console.error('Error updating data', err);
+           }
+           window.location.reload();
+        setEditModalState(false);
+    }
 
   return (
     <div className='Modal-transparent'>
@@ -43,9 +62,9 @@ const ModalEdit = ({setEditPopupState}) => {
             <input 
             type="text" 
             className="inputTitle" 
-            placeholder='Enter Task Name'
+            // placeholder='Enter Task Name'
             name="title"
-            value={addData.title}
+            value={data.title || ''}
             onChange={handleInputChange}
             required
             />
@@ -55,19 +74,22 @@ const ModalEdit = ({setEditPopupState}) => {
             <label>Details</label>
             <textarea 
             name="body"
-            value={addData.body}
+            value={data.body}
             onChange={handleInputChange}
             className='txtArea' 
-            placeholder='Enter Task Details'></textarea>
+            // placeholder='Enter Task Details'
             required
+            ></textarea>
         </div>
 
-        <button className='Modal-button'> Create Task </button>
+        <button className='Modal-button'> Edit Task </button>
     </form>
 
 </div>
+
+    
   )
 }
-}
+
 
 export default ModalEdit

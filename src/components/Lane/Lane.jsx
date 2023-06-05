@@ -3,12 +3,18 @@ import "./lane.css";
 import Task from '../Task/Task';
 
 
-const Lane = ({title, count, tBackground, loading, error, tasks}) => {
+const Lane = ({title, coount, tBackground, loading, error, tasks, editModal, sendIdToParent}) => {
+console.log("Original colors are:", tBackground);
+  const handleEditMv = ({id}) => {
+    onSendData(id);
+  }
+
+  const cnt = tasks.length;
   return (
     <div className='Lane-wrapper'>
         <div className='Lane-title' style={{backgroundColor: tBackground}}>
           <span className='title'>{title}</span>
-          <span className="count">{count}</span>
+          <span className="count" style={{ color: tBackground}}>{cnt}</span>
         </div>
 
         {loading || error ? (
@@ -20,7 +26,10 @@ const Lane = ({title, count, tBackground, loading, error, tasks}) => {
               id={task.id}
               title={task.title}
               body={task.body}
-              rodColor={task.tBackground}
+              genColor={tBackground}
+              editModal={editModal}
+              onClick={handleEditMv}
+              sendIdToParent={sendIdToParent}
               />
           ))
         )}

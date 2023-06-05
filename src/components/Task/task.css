@@ -39,7 +39,6 @@
 
 .calend {
     padding: 5px 12px;
-    background-color: #301D89;
     width: 108px;
     color: white;
     border-radius: 10px;
@@ -52,6 +51,8 @@
     cursor: pointer;
 }
 
+
+
 .threedots-conts {
     display: flex;
     gap: 10px;
@@ -59,5 +60,8 @@
     position: absolute;
     top: 30px;
     right: 10px;
-    
+}
+
+.butt_edit, .del_edit {
+    cursor: pointer;
 }
